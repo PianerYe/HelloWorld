@@ -87,7 +87,30 @@ public class SpringDataRedisTest {
             System.out.println(mylist1);
         }
 
+    }
+    /**
+     * 操作set类型数据
+     */
 
+    @Test
+    public void testSst() {
+        SetOperations setOperations = redisTemplate.opsForSet();
+
+        //存值
+        setOperations.add("myset","a","b","c","a");
+        //取值
+        Set<String> myset = setOperations.members("myset");
+        for (String o : myset) {
+            System.out.println(o);
+        }
+        //删除成员
+        setOperations.remove("myset","a","b");
+
+        //取值
+        myset = setOperations.members("myset");
+        for (String o : myset) {
+            System.out.println(o);
+        }
     }
 
 }
