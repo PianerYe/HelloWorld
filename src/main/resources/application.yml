@@ -3,3 +3,15 @@ server:
 logging:
   level:
     itheima: DEBUG
+spring:
+  redis:
+    host: 192.168.125.100
+    port: 6379
+    password: 123456
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: 1ms
+        max-idle: 4
+        min-idle: 0
