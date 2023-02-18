@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -113,4 +114,61 @@ public class SpringDataRedisTest {
         }
     }
 
+    /**
+     * 操作Zset类型数据
+     */
+    @Test
+    public void testZset() {
+        ZSetOperations zSetOperations = redisTemplate.opsForZSet();
+
+        //存储
+        zSetOperations.add("myZset","a",10.0);
+        zSetOperations.add("myZset","b",11.0);
+        zSetOperations.add("myZset","c",12.0);
+        zSetOperations.add("myZset","a",13.0);
+        //取值
+        Set<String> myZset = zSetOperations.range("myZset", 0, -1);
+        for (String s : myZset) {
+            System.out.println(s);
+        }
+        System.out.println("--------------修改分数-----------");
+        //修改分数
+        zSetOperations.incrementScore("myZset","b",20);
+        //取值
+        myZset = zSetOperations.range("myZset", 0, -1);
+        for (String s : myZset) {
+            System.out.println(s);
+        }
+        System.out.println("--------------删除成员-----------");
+        //删除成员
+        zSetOperations.remove("myZset","a","b");
+        //取值
+        myZset = zSetOperations.range("myZset", 0, -1);
+        for (String s : myZset) {
+            System.out.println(s);
+        }
+    }
+
+    /**
+     * 通用操作，针对不同的数据类型斗可以操作
+     */
+    @Test
+    public void testCommon(){
+        //获取redis中所有的key
+        Set<String> keys = redisTemplate.keys("*");
+        for (String key : keys) {
+            System.out.println(key);
+        }
+        System.out.println("---------判断某个key是否存在------------");
+        //判断某个key是否存在
+        Boolean itcast = redisTemplate.hasKey("itcast");
+        System.out.println(itcast);
+        //删除指定key
+        System.out.println("---------删除指定key------------");
+        redisTemplate.delete("myZset");
+        //获取指定key对应value的数据类型
+        System.out.println("---------查看数据类型------------");
+        DataType mySet = redisTemplate.type("myset");
+        System.out.println(mySet.name());
+    }
 }
