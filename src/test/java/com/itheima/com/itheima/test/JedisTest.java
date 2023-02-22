@@ -1,4 +1,4 @@
-package com.itheima.helloworld.com.itheima.test;
+package com.itheima.com.itheima.test;
 
 import org.junit.jupiter.api.Test;
 import redis.clients.jedis.Jedis;

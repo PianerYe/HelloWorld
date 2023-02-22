@@ -1,17 +1,23 @@
 server:
   port: 8080
-logging:
-  level:
-    itheima: DEBUG
 spring:
-  redis:
-    host: 192.168.255.100
-    port: 6379
-    password: 123456
-    database: 0
-    jedis:
-      pool:
-        max-active: 8
-        max-wait: 1ms
-        max-idle: 4
-        min-idle: 0
+  application:
+    name: helloworld
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/cache_demo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 123456
+#  redis:
+#    host: 192.168.125.100
+#    port: 6379
+#    password: 123456
+#    database: 0
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID

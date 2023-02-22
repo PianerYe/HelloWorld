@@ -1,4 +1,4 @@
-package com.itheima.helloworld.controller;
+package com.itheima.controller.helloworld;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

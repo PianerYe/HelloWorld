@@ -1,4 +1,4 @@
-package com.itheima.helloworld.config;
+package com.itheima.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
